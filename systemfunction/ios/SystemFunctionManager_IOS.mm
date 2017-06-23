@@ -23,6 +23,7 @@
 #import "AppController.h"
 //#import "AboutUsPage.h"
 #import "RootViewController.h"
+#import "Moregames.h"
 //#import "NewsBlast.h"
 
 static SystemFunctionManager *s_instance=nil;
@@ -242,20 +243,26 @@ static SystemFunctionManager *s_instance=nil;
 }
 
 -(void)cacheMoreGame{
-    [Chartboost cacheMoreApps:CBLocationDefault];
+ //   [Chartboost cacheMoreApps:CBLocationDefault];
 }
 
 -(void)showMorePage
 {
-    
-    if([Chartboost hasMoreApps:CBLocationDefault]){
-        [Chartboost showMoreApps:[AppController sharedAppController].viewController location: CBLocationDefault];
-    }else {
-        NSString *url=nil;
-        url=@"https://itunes.apple.com/us/developer/yang-peng/id929127231";
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-    }
-    [self cacheMoreGame];
+    [[Moregames sharedManager] showMoreGamePage];
+//    if([Chartboost hasMoreApps:CBLocationDefault]){
+//        [Chartboost showMoreApps:[AppController sharedAppController].viewController location: CBLocationDefault];
+//    }else {
+//        
+//        NSString *url=nil;
+//       
+//        NSDictionary* dic = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"AppConfig.plist" ofType:nil]];
+//        url=[dic valueForKey:@"MoreGamePage"];
+//        if(url == nil){
+//             url=@"https://itunes.apple.com/us/developer/yang-peng/id929127231";
+//        }
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+//    }
+//    [self cacheMoreGame];
 }
 
 - (void)showNewsBlast
