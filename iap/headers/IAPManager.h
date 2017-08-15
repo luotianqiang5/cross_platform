@@ -22,7 +22,7 @@ USING_NS_CC;
 
 class Product;
 
-typedef vector<Vec2> PaidRange;
+typedef vector<vector<int>> PaidRange;
 typedef unordered_map<string, PaidRange> ImgMap;
 typedef vector<int> PkgIndex;
 
@@ -153,7 +153,7 @@ public:
      *  @param imgName img name
      *  @param range   paid range
      */
-    void insertImg(const string& imgName,const Vec2& range);
+    void insertImg(const string& imgName,const vector<int>& range);
     
     bool isInPaidRange(const string& name,long index);
     

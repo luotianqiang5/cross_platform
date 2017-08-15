@@ -190,7 +190,14 @@ void IAPManager::csvParse(CSVParse* prase)
                 product = Product::create(iapId);
                 _products.pushBack(product);
             }
-            product->insertImg(imgName,PointFromString(range));
+            strArray arrComma;
+            FrameWorkHelper::splitWithForm(range, &arrComma);
+            vector<int> ranges;
+            for(auto str: arrComma)
+            {
+                ranges.push_back( atoi(str.c_str()));
+            }
+            product->insertImg(imgName,ranges);
         }
     }
 }
@@ -356,8 +363,8 @@ bool Product::isInPaidRange(const string& name,long index)
         PaidRange vRange = it->second;
         for (int i = 0; i < vRange.size();i++ )
         {
-            Vec2 range = vRange[i];
-            if (index >= range.x && index <= range.y)
+            auto range = vRange[i];
+            if (std::find(range.begin(), range.end(), index) != range.end())
             {
                 return true;
             }
@@ -386,7 +393,7 @@ bool Product::checkPkgIndex(const string& imgName)
     return false;
 }
 
-void Product::insertImg(const string& imgName,const Vec2& range)
+void Product::insertImg(const string& imgName,const vector<int>& range)
 {
     if (checkPkgIndex(imgName))
         return;
@@ -435,7 +442,12 @@ void Product::printProductInfos()
         __String* rangStr = __String::createWithFormat("range = ");
         for (int i = 0; i < vRange.size(); i++)
         {
-            rangStr->appendWithFormat("{%d,%d},",(int)(vRange.at(i).x),(int)(vRange.at(i).y));
+            auto range = vRange[i];
+            rangStr->append("{");
+            for(auto index:range){
+                 rangStr->appendWithFormat("%d,",index);
+            }
+            rangStr->append("},");
         }
         log("IAP ID:%s\nImgName = %s\n%s",_productId.c_str(),it->first.c_str(),rangStr->getCString());
     }
