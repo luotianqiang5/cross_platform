@@ -7,8 +7,8 @@
 #include "STSystemFunction.h"
 #include "SystemFunctionManager_Android.h"
 #include "FileUtility.h"
-
-
+#include"cocos2d.h"
+USING_NS_CC;
 STSystemFunction::STSystemFunction()
 {
 }
@@ -118,4 +118,7 @@ void STSystemFunction::refreshDCIM(const std::string& sFileDir)
 {
     CCLOG("%s", __func__);
     SystemFunctionManager::getInstance()->refreshDCIM(sFileDir);
+}
+void STSystemFunction::openUrl(const std::string& url){
+     Application::getInstance()->openURL(url);
 }

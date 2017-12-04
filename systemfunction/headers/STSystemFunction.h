@@ -122,6 +122,7 @@ public:
 	virtual void go2MarketDetail(std::string packagename);
 	virtual void contactUs();
 	virtual float densityScale();
+    virtual void openUrl(const std::string&);
 };
 
 #endif /* defined(__MysteryGuardians__SystemFunction__) */

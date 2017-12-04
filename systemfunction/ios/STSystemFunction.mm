@@ -120,3 +120,6 @@ void STSystemFunction::refreshDCIM(const std::string &sFileDir)
 {
     log("no implementation on IOS");
 }
+void STSystemFunction::openUrl(const std::string& url){
+     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithCString:url.c_str() encoding:NSUTF8StringEncoding]]];
+}
